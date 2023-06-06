@@ -1,4 +1,6 @@
+using NWS_Api1;
 using NWS_Api1.Context;
+using NWS_Api1.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDBContext>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+
 
 var app = builder.Build();
 

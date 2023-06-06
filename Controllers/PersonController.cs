@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NWS_Api1.Context;
 using NWS_Api1.Models;
+using NWS_Api1.Repositories;
 
 namespace NWS_Api1.Controllers
 {
@@ -10,39 +11,35 @@ namespace NWS_Api1.Controllers
     [Route("api/[controller]")]
     public class PersonController : Controller
     {
-        
-        private readonly AppDBContext context;
+        private IPersonRepository personRepository = null;
 
-        public PersonController(AppDBContext context)
+        public PersonController(IPersonRepository persoRepository)
         {
-            this.context = context;
+            personRepository = persoRepository;
         }
 
-        
         //GET Person/GetAllPeople
         [HttpGet("GetAllPeople")]
         public IEnumerable<Person> GetAllPeople()
         {
-            return context.person;
+            return personRepository.GetAllPeople();
         }
 
         
         //GET Person/GetOnePerson
-        [HttpGet("GetOne/{nom}{prenom}")]
+        [HttpGet("GetOne/{nom}/{prenom}")]
         public IEnumerable<Person> GetOnePerson(string nom, string prenom)
         {
-            return context.person.Where(x => x.Name == nom && x.Surname == prenom);
+            return personRepository.GetOnePerson(nom,prenom);
            
         }
 
         //POST Person/InsertOnePerson
         [HttpPost("InsertOnePerson")]
 
-        public ActionResult<Person> InsertOnePerson(Person person)
+        public void InsertOnePerson(Person person)
         {
-            context.person.Add(person);
-            context.SaveChanges();
-            return Ok();
+            personRepository.InsertOnePerson(person);
         }
 
         //PUT Person/UpdateOnePerson
@@ -50,19 +47,16 @@ namespace NWS_Api1.Controllers
 
         public ActionResult<Person> UpdateOnePerson(Person person)
         {
-            context.Entry(person).State = EntityState.Modified;
-            context.SaveChanges();
+            personRepository.UpdateOnePerson(person);
             return person;
         }
 
         //DELETE Person/DeleteOnePerson
-        [HttpDelete("DeleteOnePerson")]
+        [HttpDelete("DeleteOnePerson/{id}")]
 
-        public ActionResult<Person> DeleteOnePerson(Person person)
+        public void DeleteOnePerson(int id)
         {
-            context.person.Remove(person);
-            context.SaveChanges();
-            return Ok();
+            personRepository.DeleteOnePerson(id);
         }
 
         //GET Person/AgeAscending
@@ -70,7 +64,7 @@ namespace NWS_Api1.Controllers
 
         public IEnumerable<Person> AgeAscending()
         {
-            return context.person.OrderBy(person => person.Age);
+            return personRepository.AgeAscending();
         }
 
         //GET Person/AlphabeticalOrder
@@ -78,10 +72,7 @@ namespace NWS_Api1.Controllers
 
         public IEnumerable<string> AlphabeticalOrder()
         {
-            return context.person
-                .OrderBy(person => person.Name)
-                .ThenBy(person => person.Surname)
-                .Select(person => $"{person.Name} {person.Surname}");
+            return personRepository.AlphabeticalOrder();
         } 
     }
 }
