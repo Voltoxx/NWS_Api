@@ -12,7 +12,7 @@ namespace NWS_Api1.Repositories
         void DeleteOnePerson(int id);
         IEnumerable<Person> AgeAscending();
         IEnumerable<string> AlphabeticalOrder();
-        IEnumerable<string> HisStatut(string statut);
+        IEnumerable<Person> HisStatut(string statut);
 
     }
 }

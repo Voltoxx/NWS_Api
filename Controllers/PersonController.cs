@@ -75,10 +75,10 @@ namespace NWS_Api1.Controllers
             return personRepository.AlphabeticalOrder();
         }
 
-        //GET Statut/GetStatut
-        [HttpGet("GetStatut")]
+        //GET Statut/HisStatut
+        [HttpGet("HisStatut")]
 
-        public IQueryable<Person> HisStatut(string statut)
+        public IEnumerable<Person> HisStatut(string statut)
         {
             return personRepository.HisStatut(statut);
         }
