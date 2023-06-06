@@ -19,7 +19,7 @@ namespace NWS_Api1.Models
 
         public string Email { get; set; }
 
-        public string Statut { get; set; }
+        public Statut Statut { get; set; }
 
     }
 }

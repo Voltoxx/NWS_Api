@@ -26,6 +26,14 @@ namespace NWS_Api1.Context
             optionsBuilder.UseMySql(str, ServerVersion.AutoDetect(str));
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Person>().HasOne(i => i.Statut);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Person> person { get; set; }
+        public DbSet<Statut> statut { get; set; }
     }
 }

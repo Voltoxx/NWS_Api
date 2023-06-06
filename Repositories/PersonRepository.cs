@@ -57,5 +57,12 @@ namespace NWS_Api1.Repositories
                 .Select(person => $"{person.Name} {person.Surname}");
         }
 
+        public IEnumerable<string> HisStatut(string statut)
+        {
+            return context.person
+                .Include(o => o.Statut)
+                .Where(x => x.StatutId == statut);
+        }
+
     }
 }
