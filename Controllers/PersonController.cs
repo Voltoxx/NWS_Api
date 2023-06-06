@@ -76,7 +76,7 @@ namespace NWS_Api1.Controllers
         //GET Person/AlphabeticalOrder
         [HttpGet("AlphabeticalOrder")]
 
-        public IEnumerable<string> AlphabeticOrder()
+        public IEnumerable<string> AlphabeticalOrder()
         {
             return context.person
                 .OrderBy(person => person.Name)
