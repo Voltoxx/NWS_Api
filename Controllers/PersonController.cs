@@ -11,18 +11,18 @@ namespace NWS_Api1.Controllers
     [Route("api/[controller]")]
     public class PersonController : Controller
     {
-        private IPersonRepository personRepository = null;
+        private readonly PersonRepository _personRepository;
 
-        public PersonController(IPersonRepository persoRepository)
+        public PersonController(PersonRepository persoRepository)
         {
-            personRepository = persoRepository;
+            _personRepository = persoRepository;
         }
 
         //GET Person/GetAllPeople
         [HttpGet("GetAllPeople")]
         public IEnumerable<Person> GetAllPeople()
         {
-            return personRepository.GetAllPeople();
+            return _personRepository.GetAllPeople();
         }
 
         
@@ -30,7 +30,7 @@ namespace NWS_Api1.Controllers
         [HttpGet("GetOne/{nom}/{prenom}")]
         public IEnumerable<Person> GetOnePerson(string nom, string prenom)
         {
-            return personRepository.GetOnePerson(nom,prenom);
+            return _personRepository.GetOnePerson(nom,prenom);
            
         }
 
@@ -39,7 +39,7 @@ namespace NWS_Api1.Controllers
 
         public void InsertOnePerson(Person person)
         {
-            personRepository.InsertOnePerson(person);
+            _personRepository.InsertOnePerson(person);
         }
 
         //PUT Person/UpdateOnePerson
@@ -47,7 +47,7 @@ namespace NWS_Api1.Controllers
 
         public ActionResult<Person> UpdateOnePerson(Person person)
         {
-            personRepository.UpdateOnePerson(person);
+            _personRepository.UpdateOnePerson(person);
             return person;
         }
 
@@ -56,7 +56,7 @@ namespace NWS_Api1.Controllers
 
         public void DeleteOnePerson(int id)
         {
-            personRepository.DeleteOnePerson(id);
+            _personRepository.DeleteOnePerson(id);
         }
 
         //GET Person/AgeAscending
@@ -64,7 +64,7 @@ namespace NWS_Api1.Controllers
 
         public IEnumerable<Person> AgeAscending()
         {
-            return personRepository.AgeAscending();
+            return _personRepository.AgeAscending();
         }
 
         //GET Person/AlphabeticalOrder
@@ -72,7 +72,7 @@ namespace NWS_Api1.Controllers
 
         public IEnumerable<string> AlphabeticalOrder()
         {
-            return personRepository.AlphabeticalOrder();
+            return _personRepository.AlphabeticalOrder();
         }
 
         //GET Statut/HisStatut
@@ -80,7 +80,7 @@ namespace NWS_Api1.Controllers
 
         public IEnumerable<Person> HisStatut(string statut)
         {
-            return personRepository.HisStatut(statut);
+            return _personRepository.HisStatut(statut);
         }
     }
 }

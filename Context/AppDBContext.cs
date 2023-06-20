@@ -33,7 +33,6 @@ namespace NWS_Api1.Context
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Person> person { get; set; }
-        public DbSet<Statut> statut { get; set; }
+        public DbSet<Person> Person { get; set; } = null!;  
     }
 }

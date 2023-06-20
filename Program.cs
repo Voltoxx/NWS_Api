@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDBContext>();
-builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<PersonRepository>();
 
 
 var app = builder.Build();

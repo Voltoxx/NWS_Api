@@ -9,9 +9,9 @@ namespace NWS_Api1.Models
         [Key]
         public int StatutId { get; set; }
 
-        public string NameStatut { get; set; }
+        public string NameStatut { get; set; } = string.Empty;
 
-        public string Since { get; set; }
+        public string Since { get; set; } = null!;
 
     }
 }
